@@ -13,11 +13,16 @@ function getComputerChoice() {
 
 let playerChoice;
 
+//Ask user for input
 function getPlayerSelection() {
-    return playerChoice = prompt("What is your choice?").toLowerCase();
+   playerChoice = prompt("Rock, Paper, Scissors?").toLowerCase();
+   //If rock, paper, or scissors not entered keep asking
+   while (playerChoice !== 'rock' && playerChoice !== 'paper' && playerChoice !== 'scissors') {
+        playerChoice = prompt("Rock, Paper, Scissors?").toLowerCase();
+   }
+   return playerChoice
 }
 
-//let getPlayerSelection = () => prompt("What is your choice?").toLowerCase(); 
 let playerSelection;
 let computerSelection;
 let result;
@@ -38,19 +43,16 @@ function playRound(playerSelection, computerSelection) {
         return result = "lose";
     } else {
         console.log('Error');
+        return result = 'error';
     }
 }
 
-//let playerSelection;
-//let computerSelection = getComputerChoice();
-
-//Play a 5-round game of Rock-Paper-Scissors
+//Play a n-round game of Rock-Paper-Scissors
 function game() {
     //Establish player and computer score
     let playerScore = 0;
     let computerScore = 0;
-    let playRoundCounter = 0;
-    //Play a round
+    //Play n rounds and display results of each round
     for (let i =0; i < 5; i++) {
         playRound();
         if (result === "tie") {
@@ -64,8 +66,9 @@ function game() {
         } else {
             console.log('error');
         }
-        console.log(`You have ${playerScore} and the computer has ${computerScore}`);
+        console.log(`After ${i} rounds, you have ${playerScore} and the computer has ${computerScore}`);
     }
+    //Display results of the game
     if (playerScore > computerScore) {
         console.log('You have defeated the computer :)');
     } else if (playerScore < computerScore) {
@@ -73,14 +76,6 @@ function game() {
     } else {
         console.log('You and the computer tied :/');
     }
-    //return 'Thanks for playing!'
-
-   //Keep track of score
-   //Report if user won/lost/tied
 }
 
 console.log(game());
-
-//const playerSelection = 'rock';
-//const computerSelection = getComputerChoice();
-//console.log(playRound(playerSelection, computerSelection));
