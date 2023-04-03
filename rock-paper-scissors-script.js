@@ -42,6 +42,22 @@ buttons.forEach((button) => {
         } else {
             roundResult.textContent = "An error occurred";
         }
+        if (pScore === 5) {
+            alert('Congratulations, you won! Play again');
+            pScore = 0;
+            playerScore.textContent = `Player: ${pScore}`;
+            cScore = 0;
+            computerScore.textContent = `Computer: ${cScore}`;
+            roundResult.textContent = "";
+        }
+        else if (cScore === 5) {
+            alert('Sorry, you lost. Play again');
+            pScore = 0;
+            playerScore.textContent = `Player: ${pScore}`;
+            cScore = 0;
+            computerScore.textContent = `Computer: ${cScore}`;
+            roundResult.textContent = "";
+        }
     })  
 })
 
