@@ -1,4 +1,3 @@
-//Randomly assign rock, paper, or scissors as the computer's choice 
 let computerChoice;
 let computerSelection;
 let result;
@@ -12,6 +11,7 @@ function getComputerChoice() {
         return computerChoice = 'scissors';
     }
 }
+
 let pScore = 0;
 const playerScore = document.querySelector('.playerScore');
 playerScore.textContent = `Player: ${pScore}`;
@@ -19,11 +19,11 @@ let cScore = 0;
 const computerScore = document.querySelector('.computerScore');
 computerScore.textContent = `Computer: ${cScore}`;
 
-// Add event listener to buttons to play the game
 const buttons = document.querySelectorAll('button');
+
+const container = document.querySelector('#container');
+
 buttons.forEach((button) => {
-    //let playerScore = 0;
-    //let computerScore = 0;
     button.addEventListener('click', () => {
         const playerSelection = button.id;
         console.log(playerSelection);
@@ -42,57 +42,31 @@ buttons.forEach((button) => {
         } else {
             roundResult.textContent = "An error occurred";
         }
-        if (pScore === 5) {
-            alert('Congratulations, you won! Play again');
-            pScore = 0;
-            playerScore.textContent = `Player: ${pScore}`;
-            cScore = 0;
-            computerScore.textContent = `Computer: ${cScore}`;
-            roundResult.textContent = "";
-        }
-        else if (cScore === 5) {
-            alert('Sorry, you lost. Play again');
-            pScore = 0;
-            playerScore.textContent = `Player: ${pScore}`;
-            cScore = 0;
-            computerScore.textContent = `Computer: ${cScore}`;
-            roundResult.textContent = "";
+        if (pScore === 5 || cScore === 5) {
+            const gameOver = document.createElement('div');
+            const gameOverText = document.createElement('div');
+            const newGameButton = document.createElement('button');
+
+            gameOver.appendChild(gameOverText);
+            if (pScore > cScore) {
+                gameOverText.textContent = `Congratulations! You beat the computer ${pScore} to ${cScore}.`;
+            } else {
+                gameOverText.textContent = `Bummer. You lost to the computer ${cScore} to ${pScore}.`;
+            };
+
+            gameOver.appendChild(newGameButton);
+            newGameButton.textContent = "Play again";
+            container.appendChild(gameOver);
+
+            newGameButton.addEventListener('click', () => {
+                pScore = 0;
+                playerScore.textContent = `Player: ${pScore}`;
+                cScore = 0;
+                computerScore.textContent = `computer: ${cScore}`;
+                roundResult.textContent = "";
+                container.removeChild(gameOver);
+            })
         }
     })  
 })
 
-//Play a n-round game of Rock-Paper-Scissors
-function game() {
-    //Establish player and computer score
-    let playerScore = 0;
-    let computerScore = 0;
-    let roundNumber = 0;
-    //Play n rounds and display results of each round
-    // for (let i =0; i < 5; i++) {
-        playRound();
-        if (result === "tie") {
-            console.log('successful tie');
-        } else if (result === "win") {
-            playerScore = ++playerScore;
-            console.log(`You win! ${playerChoice} beats ${computerChoice}!`);
-        } else if (result === "lose") { 
-            computerScore = ++computerScore;
-            console.log(`You lose! ${computerChoice} beats ${playerChoice}`);
-        } else {
-            console.log('error');
-        }
-        roundNumber = ++roundNumber;
-        console.log(`After ${roundNumber} rounds, you have ${playerScore} and the computer has ${computerScore}`);
-    //}
-
-    //Display results of the game
-    if (playerScore > computerScore) {
-        console.log('You have defeated the computer :)');
-    } else if (playerScore < computerScore) {
-        console.log('The computer defeated you :(');
-    } else {
-        console.log('You and the computer tied :/');
-    }
-}
-
-//console.log(game());
